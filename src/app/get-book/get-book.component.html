@@ -1,0 +1,18 @@
+<br>
+<h4>List of books</h4>
+<br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td><strong>Book Name</strong></td>
+            <td><strong>Author</strong></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let book of books">
+            <td>{{ book.book_name }}</td>
+            <td>{{ book.author }}</td>
+        </tr>
+    </tbody>
+</table>

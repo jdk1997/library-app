@@ -1,0 +1,40 @@
+<br>
+<h4>List of members</h4>
+<br>
+<p>The date is of the form YYYY-MM-DD</p>
+<br>
+<table class="table table-hover" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>E-mail</strong></td>
+            <td><strong>Book details</strong></td>
+        </tr>
+    </thead>
+
+    <tbody *ngFor="let member of members">
+        <tr>
+            <td>{{ member.fname }}</td>
+            <td>{{ member.lname }}</td>
+            <td>{{ member.email }}</td>
+            <td>
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th><strong>Book</strong></th>
+                        <th><strong>Issue date</strong></th>
+                        <th><strong>Return date</strong></th>
+                    </tr>
+
+                    <ng-container *ngFor="let book of member.books">
+                        <tr>
+                            <td>{{ book.book_name }}</td>
+                            <td>{{ book.issue_date }}</td>
+                            <td>{{ book.return_date }}</td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

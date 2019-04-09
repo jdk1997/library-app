@@ -1,0 +1,69 @@
+<br>
+<div class="card">
+    <div class="card-body">
+      <form #myForm="ngForm" [formGroup]="angForm" novalidate>
+        
+        <div class="form-group">
+          <label class="col-md-4">Card no.</label>
+          <input type="number" class="form-control" formControlName="card_no" pattern="^[0-9]+$" #card_no />
+        </div>
+        <div *ngIf="angForm.controls['card_no'].invalid && (angForm.controls['card_no'].dirty || angForm.controls['card_no'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['card_no'].errors.required">
+            Card Number is required.
+          </div>
+          <div *ngIf="angForm.controls['card_no'].errors?.pattern">
+            Enter valid number. No spaces and digits allowed.
+          </div>
+        
+        </div>
+        
+        
+        <div class="form-group">
+          <label class="col-md-4">First Name</label>
+          <input type="text" class="form-control" formControlName="fname" pattern="^[a-zA-Z]+$" #fname />
+        </div>
+        <div *ngIf="angForm.controls['fname'].invalid && (angForm.controls['fname'].dirty || angForm.controls['fname'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['fname'].errors.required">
+            First Name is required.
+          </div>
+          <div *ngIf="angForm.controls['fname'].errors?.pattern">
+            Enter valid name. No spaces and alphabets allowed.
+          </div>
+        
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-4">Last Name</label>
+            <input type="text" class="form-control" formControlName="lname" pattern="^[a-zA-Z]+$" #lname />
+          </div>
+          <div *ngIf="angForm.controls['lname'].invalid && (angForm.controls['lname'].dirty || angForm.controls['lname'].touched)" class="alert alert-danger">
+            <div *ngIf="angForm.controls['lname'].errors.required">
+              Last Name is required.
+            </div>
+            <div *ngIf="angForm.controls['fname'].errors?.pattern">
+              Enter valid name. No spaces and digits allowed.
+            </div>
+          
+          </div>
+        <div class="form-group">
+          <label class="col-md-4">E-mail </label>
+          <input type="text" class="form-control" formControlName="email" pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$" #email />
+        </div>
+        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['email'].errors.required">
+            E-mail is required.
+          </div>
+          <div *ngIf="angForm.controls['email'].errors?.pattern">
+            Please enter valid email id.
+          </div>
+        </div>
+        <div class="form-group">
+          <button (click)="addMember(card_no.value, fname.value, lname.value, email.value); myForm.reset()"
+              [disabled]="angForm.pristine || angForm.invalid" 
+              class="btn btn-primary">
+              Register
+          </button>
+      </div>
+      </form>
+    </div>
+  </div>

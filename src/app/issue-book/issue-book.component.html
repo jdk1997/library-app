@@ -1,0 +1,71 @@
+<br>
+<div class="card">
+  <div class="card-body">
+    <form #myForm="ngForm" [formGroup]="angForm">
+      <div class="form-group">
+        <label class="col-md-4">Card no.</label>
+        <input type="number" class="form-control" name="card_no" formControlName="card_no" pattern="^[0-9]+$" required #card_no />
+      </div>
+
+      <div *ngIf="angForm.controls['card_no'].invalid && (angForm.controls['card_no'].dirty || angForm.controls['card_no'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['card_no'].errors.required">
+          Card Number is required.
+        </div>
+        <div *ngIf="angForm.controls['card_no'].errors?.pattern">
+          Enter valid number. No spaces and alphabets allowed.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-4">Book Name</label>
+        <select class="form-control" name="book_name" ng-options="let book of books" formControlName="book_name" required #book_name>
+          <option selected="" value=""></option>
+          <option *ngFor="let book of books">{{book.book_name}}</option>
+        </select>
+      </div>
+      <div *ngIf="angForm.controls['book_name'].invalid && (angForm.controls['book_name'].dirty || angForm.controls['book_name'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['book_name'].errors.required">
+          Book name is required.
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col">
+          <label class="control-label col-md-4">Issue date</label>
+          <input type="date" class="form-control" name="issue_date" formControlName="issue_date" required #issue_date/>
+        </div>
+        <div *ngIf="angForm.controls['issue_date'].invalid && (angForm.controls['issue_date'].dirty || angForm.controls['issue_date'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="angForm.controls['issue_date'].errors.required">
+            Issue date is required.
+          </div>
+        </div>
+        <div class="col">
+          <label class="col-md-4">Return date</label>
+          <input type="date" class="form-control" name="return_date" formControlName="return_date" required #return_date/>
+        </div>
+        <div *ngIf="angForm.controls['return_date'].invalid && (angForm.controls['return_date'].dirty || angForm.controls['return_date'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="angForm.controls['return_date'].errors.required">
+            Return date is required.
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="form-group row">
+        <div class="col">
+          <button class="col-md-4" style="margin:5px;" [disabled]="angForm.pristine || angForm.invalid" (click)="issueBook(card_no.value, book_name.value, issue_date.value, return_date.value); clearSelect();" class="btn btn-primary">
+            Issue Book
+          </button>
+          <button class="col-md-6" style="margin:5px;" (click)="myForm.reset()" class="btn btn-primary">
+            Clear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

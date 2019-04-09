@@ -1,0 +1,46 @@
+<br>
+<div class="card">
+  <div class="card-body">
+    <form #myForm="ngForm" [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Card No.</label>
+        <input type="number" class="form-control" formControlName="card_no" pattern="^[0-9]+$" #card_no />
+      </div>
+      <div *ngIf="angForm.controls['card_no'].invalid && (angForm.controls['card_no'].dirty || angForm.controls['card_no'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['card_no'].errors.required">
+          Card Number is required.
+        </div>
+        <div *ngIf="angForm.controls['card_no'].errors?.pattern">
+          Enter valid number. No spaces and alphabets allowed.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-4">Book Name</label>
+        <select class="form-control" ng-options="let book of books" formControlName="book_name" #book_name>
+          <option selected="" value=""></option>  
+          <option *ngFor="let book of books">{{book.book_name}}</option>
+        </select>
+      </div>
+      <div *ngIf="angForm.controls['book_name'].invalid && (angForm.controls['book_name'].dirty || angForm.controls['book_name'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['book_name'].errors.required">
+          Book name is required.
+        </div>
+      </div>
+      <br>
+      <div class="row form-group">
+        <div class="col">
+          <button class="col-md-4" style="margin:5px;" (click)="returnBook(card_no.value, book_name.value)" [disabled]="angForm.pristine || angForm.invalid"
+            class="btn btn-primary">
+            Return Book
+          </button>
+          <button class="col-md-6" style="margin:5px;" (click)="myForm.reset()" class="btn btn-primary">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
