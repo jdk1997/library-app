@@ -3,30 +3,39 @@
     <form #myForm="ngForm" [formGroup]="angForm" novalidate>
       <div class="form-group">
         <label class="col-md-4">Book Name</label>
-        <input type="text" class="form-control" formControlName="book_name" #book_name />
+        <input type="text" class="form-control" formControlName="book_name" pattern="^[a-zA-Z0-9 ]+$" #book_name />
       </div>
-      <div *ngIf="angForm.controls['book_name'].invalid && (angForm.controls['book_name'].dirty || angForm.controls['book_name'].touched)" class="alert alert-danger">
+      <div *ngIf="angForm.controls['book_name'].invalid && (angForm.controls['book_name'].dirty || angForm.controls['book_name'].touched)"
+        class="alert alert-danger">
         <div *ngIf="angForm.controls['book_name'].errors.required">
           Book Name is required.
         </div>
+        <div *ngIf="angForm.controls['book_name'].errors?.pattern">
+          Please enter a valid book name.
+        </div>
+
       </div>
 
       <div class="form-group">
-          <label class="col-md-4">Author</label>
-          <input type="text" class="form-control" formControlName="author" #author />
+        <label class="col-md-4">Author</label>
+        <input type="text" class="form-control" formControlName="author" pattern="^[a-zA-Z ]+$" #author />
+      </div>
+      <div *ngIf="angForm.controls['author'].invalid && (angForm.controls['author'].dirty || angForm.controls['author'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['author'].errors.required">
+          Author is required.
         </div>
-        <div *ngIf="angForm.controls['author'].invalid && (angForm.controls['author'].dirty || angForm.controls['author'].touched)" class="alert alert-danger">
-          <div *ngIf="angForm.controls['author'].errors.required">
-            Author is required.
-          </div>
+        <div *ngIf="angForm.controls['author'].errors?.pattern">
+          Please enter a valid  author name.
         </div>
+
+      </div>
       <div class="form-group">
-        <button (click)="addBook(book_name.value, author.value); myForm.reset()"
-            [disabled]="angForm.pristine || angForm.invalid" 
-            class="btn btn-primary">
-            Add Book
+        <button (click)="addBook(book_name.value, author.value); myForm.reset()" [disabled]="angForm.pristine || angForm.invalid"
+          class="btn btn-primary">
+          Add Book
         </button>
-    </div>
+      </div>
     </form>
   </div>
 </div>
