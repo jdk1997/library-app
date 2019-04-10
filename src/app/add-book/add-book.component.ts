@@ -16,8 +16,8 @@ export class AddBookComponent implements OnInit {
 
   createForm(){
     this.angForm = this.fb.group({
-      book_name: ['', Validators.required],
-      author: ['', Validators.required]
+      book_name: ['', Validators.required, Validators.pattern(/^[a-zA-Z0-9 ]+$/)],
+      author: ['', Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]
     })
   }
 
